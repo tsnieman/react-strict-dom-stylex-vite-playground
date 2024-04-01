@@ -2,10 +2,8 @@ import { useState } from 'react'
 import { css, html } from "react-strict-dom";
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import {
-	// DARK,
-	colors, 
-} from "./theme.stylex";
+import { colors } from "./theme.stylex";
+import { Button } from './_components/button';
 
 function App() {
     const [count, setCount] = useState(0)
@@ -30,9 +28,9 @@ function App() {
 
             <html.div>
                 <html.button
-					style={[styles.button]}
-					onClick={() => setCount((count) => count + 1)}
-				>
+                    style={[styles.customButton]}
+                    onClick={() => setCount((count) => count + 1)}
+                >
                     count is {count}
                 </html.button>
 
@@ -44,6 +42,45 @@ function App() {
             <html.p>
                 Click on the Vite and React logos to learn more
             </html.p>
+
+            <html.div style={[styles.column]}>
+                <html.h2>
+                    Buttons
+                </html.h2>
+
+                <html.div
+                    style={[
+                        styles.row,
+                        {
+                            gap: '20px',
+                        },
+                    ]}
+                >
+                    <Button>
+                        default (no variant)
+                    </Button>
+
+                    <Button
+                        styles={[styles.customButton]}
+                    >
+                        default (w/ custom styles)
+                    </Button>
+
+                    <Button
+                        // style={[styles.customButton]}
+                        variant="solid"
+                    >
+                        solid
+                    </Button>
+
+                    <Button
+                        // style={[styles.customButton]}
+                        variant="outline"
+                    >
+                        outline
+                    </Button>
+                </html.div>
+            </html.div>
         </>
     )
 }
@@ -59,25 +96,19 @@ const styles = css.create({
         outlineColor: '#ff00aa',
     },
 
-    button: {
-		padding: 16,
-		':hover': {
-			default: null,
-			'@media (hover: hover)': {
-				transform: 'scale(1.1)',
-			},
-		},
-		':active': {
-			transform: 'scale(0.5)',
-			color: 'red',
-		},
-		// // 
-		// TODO Not working with `vite-plugin-stylex` yet?
-		// Example adapted from https://stylexjs.com/docs/learn/theming/defining-variables/#using-media-queries
-		// [DARK]: {
-		// 	backgroundColor: 'black',
-		// 	color: 'white',
-		// },
+    row: {
+        display: 'flex',
+        flexDirection: 'row',
+    },
+
+    column: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+
+    customButton: {
+        backgroundColor: 'pink',
+        fontSize: 32,
     },
 });
 
